@@ -1,0 +1,8 @@
+services:
+  server:
+    build: foodplanner-server
+    restart: unless-stopped
+    volumes:
+      - ./foodplanner-server:/app
+    ports:
+      - 8000:8080
