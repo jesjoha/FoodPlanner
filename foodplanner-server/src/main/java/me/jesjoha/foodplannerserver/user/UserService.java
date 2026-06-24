@@ -1,5 +1,7 @@
 package me.jesjoha.foodplannerserver.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,20 +11,13 @@ public class UserService {
 
     private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    @Autowired
+    public UserService(@Qualifier("postgres") UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     public List<User> getUsers() {
         return userRepository.getAll();
-    }
-
-    public User getUserByName(String username) {
-        return userRepository.getUserByUsername(username);
-    }
-
-    public User getUserByEmail(String email) {
-        return userRepository.getUserByEmail(email);
     }
 
     public void addUser(User user) {

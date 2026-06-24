@@ -2,6 +2,8 @@ services:
   server:
     build: foodplanner-server
     restart: unless-stopped
+    env_file:
+      - project.env
     volumes:
       - ./foodplanner-server:/app
     ports:

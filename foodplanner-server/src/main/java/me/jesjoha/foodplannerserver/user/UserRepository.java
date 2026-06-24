@@ -1,60 +1,15 @@
 package me.jesjoha.foodplannerserver.user;
 
-import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
 import java.util.List;
 
-@Repository
-public class UserRepository {
-    private List<User> users;
+public interface UserRepository {
 
-    public UserRepository() {
-        users = new ArrayList<>();
-    }
+    void addUser(User user);
 
-    public void addUser(User user) {
-        users.add(user);
-    }
+    User removeUser(int id);
 
-    public User removeUser(int id) {
-        for (User user : users) {
-            if (user.getId() == id) {
-                users.remove(user);
-                return user;
-            }
-        }
-        return null;
-    }
+    List<User> getAll();
 
-    public List<User> getAll() {
-        return users;
-    }
+    User getUserById(int id);
 
-    public User getUserByEmail(String email) {
-        for (User user : users) {
-            if (user.getEmail().equals(email)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    public User getUserByUsername(String username) {
-        for (User user : users) {
-            if (user.getName().equals(username)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    public User getUserById(int id) {
-        for (User user : users) {
-            if (user.getId() == id) {
-                return user;
-            }
-        }
-        return null;
-    }
 }

@@ -1,29 +1,40 @@
 package me.jesjoha.foodplannerserver.user;
 
-import java.util.UUID;
-
 public class User {
     private int id;
     private String email;
-    private String name;
+    private String password_hash;
 
-    private static int userCount = 0;
+    public User(int id, String email, String password_hash) {
+        this.id = id;
+        this(email, password_hash);
+    }
 
-    public User(String name, String email) {
-        this.name = name;
+    public User(String email, String password_hash) {
         this.email = email;
-        this.id = userCount++;
+        this.password_hash = password_hash;
     }
-
-    public String getName() {
-        return name;
-    }
+    public User() {}
 
     public String getEmail() {
         return email;
     }
 
+    public String getPassword_hash() {
+        return password_hash;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPassword_hash(String password_hash) {
+        this.password_hash = password_hash;
     }
 }
