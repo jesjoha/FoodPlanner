@@ -11,6 +11,16 @@ services:
     depends_on:
       - database
 
+  client:
+    build: client
+    restart: unless-stopped
+    volumes:
+      - ./client:/app
+    ports:
+      - 4321:4321
+    depends_on:
+      - server
+  
   database:
     container_name: foodplanner_postgresql_database
     image: postgres:17.0
