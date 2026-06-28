@@ -1,0 +1,6 @@
+CREATE TABLE meals (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL DEFAULT 'Default description',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

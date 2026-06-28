@@ -33,12 +33,7 @@ public class PostgresUserRepository implements UserRepository {
     @Override
     public List<User> getAll() {
         String sql = "SELECT * FROM users";
-        return jdbcTemplate.query(sql, (resultSet, i) -> {
-            int id = resultSet.getInt("id");
-            String email = resultSet.getString("email");
-            String passwordHash = resultSet.getString("password_hash");
-            return new User(id, email, passwordHash);
-        });
+        return jdbcTemplate.query(sql, new UserRowMapper());
     }
 
     @Override

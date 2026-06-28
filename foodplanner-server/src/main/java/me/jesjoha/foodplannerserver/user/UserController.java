@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/users")
 @RestController
 public class UserController {
 
@@ -17,28 +17,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
-
-    @GetMapping("/users")
+    @GetMapping
     public List<User> getUsers() {
         return userService.getUsers();
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public User createUser(@RequestBody User user) {
         userService.addUser(user);
         return user;
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public User deleteUser(@PathVariable int id) {
         return userService.removeUserById(id);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable int id) {
         return userService.getUserById(id);
     }

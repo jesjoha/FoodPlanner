@@ -1,4 +1,4 @@
-package me.jesjoha.foodplannerserver.recipe;
+package me.jesjoha.foodplannerserver.meal;
 
 import java.util.List;
 
