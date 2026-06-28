@@ -1,10 +1,12 @@
 <script>
+
+    const PUBLIC_API_URL = import.meta.env.PUBLIC_API_URL;
     const API_URL = "http://localhost:8000/api/v1";
 
     let users = $state([]);
 
     const getUsers = async () => {
-        const response = await fetch(`${API_URL}/users`);
+        const response = await fetch(`${PUBLIC_API_URL}/users`);
         users = await response.json();
     }
 
