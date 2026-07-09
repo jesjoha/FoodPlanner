@@ -30,23 +30,19 @@ public class PostgresMealRepository implements MealRepository {
 
     @Override
     public Meal addMeal(Meal meal) {
-        String sql = "INSERT INTO meals (name, description) VALUES (?, ?)";
-        jdbcTemplate.update(sql, meal.getName(), meal.getDescription());
-        return meal;
+        String sql = "INSERT INTO meals (name, description) VALUES (?, ?) RETURNING *";
+        return jdbcTemplate.query(sql, new MealRowMapper(), meal.getName(), meal.getDescription()).getFirst();
     }
 
     @Override
     public Meal updateMeal(int id, Meal updatedMeal) {
-        String sql = "UPDATE meals SET name = ?, description = ? WHERE id = ?";
-        jdbcTemplate.update(sql, updatedMeal.getName(), updatedMeal.getDescription(), id);
-        return updatedMeal;
+        String sql = "UPDATE meals SET name = ?, description = ? WHERE id = ? RETURNING *";
+        return jdbcTemplate.query(sql, new MealRowMapper(), updatedMeal.getName(), updatedMeal.getDescription(), id).getFirst();
     }
 
     @Override
     public Meal deleteMeal(int id) {
-        Meal meal = getById(id);
-        String sql = "DELETE FROM meals WHERE id = ?";
-        jdbcTemplate.update(sql, id);
-        return meal;
+        String sql = "DELETE FROM meals WHERE id = ? RETURNING *";
+        return jdbcTemplate.query(sql, new MealRowMapper(), id).getFirst();
     }
 }
