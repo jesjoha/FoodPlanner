@@ -1,0 +1,12 @@
+---
+import Meal from "../../components/Meal.svelte";
+import Layout from "../../layouts/Layout.astro";
+
+export const prerender = false
+const id = Astro.params.id;
+
+---
+
+<Layout>
+    <Meal {id} client:load />
+</Layout>

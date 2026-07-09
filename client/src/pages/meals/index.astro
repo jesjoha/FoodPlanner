@@ -1,8 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Meals from "../../components/Meals.svelte";
+import MealForm from "../../components/MealForm.svelte";
 ---
 
 <Layout title="Meals">
     <Meals client:load />
+    <MealForm client:load />
 </Layout>

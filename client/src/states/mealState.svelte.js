@@ -22,10 +22,13 @@ const useMealState = () => {
         },
         update: async (id, meal) => {
             const updatedMeal = await mealsApi.updateMeal(id, meal);
-            mealState.filter((meal) => meal.id === id);
-            mealState.push(updatedMeal);
+            mealState = mealState.map((m) => m.id === id, updatedMeal);
         },
-    }
-}
+        remove: async (id) => {
+            const removedMeal = await mealsApi.removeMeal(id);
+            mealState = mealState.filter((m) => m.id !== id);
+        },
+    };
+};
 
 export { useMealState };

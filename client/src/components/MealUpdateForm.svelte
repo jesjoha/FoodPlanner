@@ -1,18 +1,22 @@
 <script>
     import { useMealState } from "../states/mealState.svelte.js";
 
+    const { meal } = $props();
+
     let mealState = useMealState();
 
-    const addMeal = async (e) => {
-        const meal = Object.fromEntries(new FormData(e.target));
-        await mealState.add(meal);
-        e.target.reset();
+    const updateMeal = async (e) => {
         e.preventDefault();
+        const updatedMeal = Object.fromEntries(new FormData(e.target));
+        await mealState.update(meal.id, updatedMeal);
+        e.target.reset();
     };
 
 </script>
 
-<form class="space-y-4" onsubmit={addMeal}>
+<h4>Make changes to meal</h4>
+
+<form class="space-y-4" onsubmit={updateMeal}>
     <label class="label" for="name">
         <span class="label-text">Meal name</span>
         <input
@@ -20,7 +24,7 @@
         id="name"
         name="name"
         type="text"
-        placeholder="meal name"
+        defaultValue="{meal.name}"
         />
     </label>
     <label class="label" for="description">
@@ -30,8 +34,8 @@
         id="description"
         name="description"
         type="text"
-        placeholder="meal description"
+        defaultValue="{meal.description}"
     />
     </label>
-    <button type="submit">Add meal</button>
+    <button type="submit">Update meal</button>
 </form>

@@ -1,25 +1,31 @@
 <script>
-    const PUBLIC_API_URL = import.meta.env.PUBLIC_API_URL;
 
-    let meals = $state([]);
+    import { useMealState } from "../states/mealState.svelte.js";
+    import MealItem from "./MealItem.svelte";
+
+    let mealState = useMealState();
 
     const getMeals = async () => {
-        const response = await fetch(`${PUBLIC_API_URL}/meals`);
-        meals = await response.json();
+        await mealState.readAll();
     }
 
+    /*
     $effect(() => {
         getMeals();
     });
+    */
+   if (!import.meta.env.SSR) {
+    getMeals();
+   };
 
 </script>
 
 <h2>Meals:</h2>
 
-{#if meals}
+{#if mealState.meals}
     <ul>
-        {#each meals as meal}
-            <li>ID: {meal.id} | Name: {meal.name} | Description: {meal.description}</li>
+        {#each mealState.meals as meal}
+            <a href="/meals/{meal.id}"><MealItem {meal} /></a>
         {/each}
     </ul>
 {/if}

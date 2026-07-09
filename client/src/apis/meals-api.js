@@ -16,7 +16,9 @@ const readMeals = async () => {
  */
 const postMeal = async (meal) => {
     const response = await fetch(`${PUBLIC_API_URL}/meals`, {
-        headers: "Content-Type: application/json",
+        headers: {
+            "Content-Type": "application/json",
+        },
         method: "POST",
         body: JSON.stringify(meal),
     });
@@ -43,7 +45,9 @@ const readMeal = async (mealId) => {
  */
 const updateMeal = async (mealId, meal) => {
     const response = await fetch(`${PUBLIC_API_URL}/meals/${mealId}`, {
-        headers: "Content-Type: application/json",
+        headers: {
+            "Content-Type": "application/json",
+        },
         method: "PUT",
         body: JSON.stringify(meal),
     });
@@ -58,7 +62,7 @@ const updateMeal = async (mealId, meal) => {
  */
 const removeMeal = async (id) => {
     const response = await fetch(`${PUBLIC_API_URL}/meals/${id}`, {
-        headers: "DELETE",
+        method: "DELETE",
     });
     const data = await response.json();
     return data;
