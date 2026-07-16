@@ -25,7 +25,7 @@
 {#if mealState.meals}
     <ul>
         {#each mealState.meals as meal}
-            <a href="/meals/{meal.id}"><MealItem {meal} /></a>
+            <MealItem {meal} />
         {/each}
     </ul>
 {/if}
